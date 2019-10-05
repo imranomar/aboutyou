@@ -52,18 +52,4 @@ class MatrixMultiplicationTest extends TestCase
         $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
     }
 
-//        BELOW GIVES ERROR 500
-//    public function test1()
-//    {
-//        $data_sent = [
-//            'num1' => "2",
-//            'num2' => "3",
-//        ];
-//
-//        $data_received = "[[7,10],[15,22]]";
-//
-//        $result = $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->content();
-//        $this->assertTrue($result==$data_received);
-//
-//    }
 }
