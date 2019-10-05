@@ -18,8 +18,9 @@ use Illuminate\Hashing\BcryptHasher;
 
 
 
-Route::middleware('AuthBasic')->post('/multiply', 'MatrixContoller@multiply')->name('mul');
-Route::post('/toletters', 'MatrixContoller@intToLetters')->name('intToLetters');
+//Route::middleware('AuthBasic')->post('/multiply', 'MatrixContoller@multiply')->name('mul');
+Route::post('/multiply', 'MatrixContoller@multiply')->name('mul');
+
 Route::post('register', function (Request $request)
 {
     $validator = Validator::make($request->all(), [

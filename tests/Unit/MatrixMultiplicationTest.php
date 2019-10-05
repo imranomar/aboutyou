@@ -48,7 +48,7 @@ class MatrixMultiplicationTest extends TestCase
             'mat1' => "[[1,2,3],[4,5,6],[7,8,9]]",
             'mat2' => "[[1,2,3],[4,5,6]]",
         ];
-        $expected = array('error'=>'Matrix cannot be multiplied');
+        $expected = array('error'=>'Matrices cannot be multiplied');
         $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
     }
 
