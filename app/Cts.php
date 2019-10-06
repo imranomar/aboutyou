@@ -20,4 +20,8 @@ class Cts
     const HTTP_UNPROCESSABLE_ENTITY = 422;
     const HTTP_NOT_FOUND = 404;
     const HTTP_INTERNAL_SERVER_ERROR = 500 ;
+
+    //matrix
+    const MATRIX_SIZE_MAX = 1000;
+
 }

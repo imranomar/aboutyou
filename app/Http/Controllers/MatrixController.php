@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Cts;
+use App\Helper;
 use App\MatrixLog;
 use Illuminate\Http\Request;
 
-class MatrixContoller extends Controller
+class MatrixController extends Controller
 {
 
     public function multiply(Request $r)
     {
         //[[[1,2],[3,4]],[[1,2],[3,4]]]
         //    echo "<pre>";
+        $enable_caching = false;
 
         $res = array(); //array to store the result
 
@@ -44,10 +46,24 @@ class MatrixContoller extends Controller
             return response(json_encode(array('error' => 'Matrix 2 is empty')), Cts::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $no_cols_mat1 = sizeof($mat1[0]);
-        $no_cols_mat2 = sizeof($mat2[0]);
-        $no_rows_mat2 = sizeof($mat2);
+        if (is_array($mat1[0])) {
+            $no_cols_mat1 = sizeof($mat1[0]);
+        } else {//support [3]*[5] also instead of [[3]]*[[5]] only
 
+            $mat1[0] = array($mat1[0]);
+            $no_cols_mat1 = 1;
+        }
+
+        if (is_array($mat2[0])) {
+            $no_cols_mat2 = sizeof($mat2[0]);
+        } else { //support [3]*[5] also instead of [[3]]*[[5]] only
+
+            $mat2[0] = array($mat2[0]);
+            $no_cols_mat2 = 1;
+        }
+
+        $no_rows_mat1 = sizeof($mat1);
+        $no_rows_mat2 = sizeof($mat2);
 
         if ($no_cols_mat1 == 0) {
             return response(json_encode(array('error' => 'Matrix 1 first row is empty')), Cts::HTTP_UNPROCESSABLE_ENTITY);
@@ -57,18 +73,28 @@ class MatrixContoller extends Controller
             return response(json_encode(array('error' => 'Matrix 2 second row is empty')), Cts::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+
+        if ($no_rows_mat1 > CTS::MATRIX_SIZE_MAX || $no_cols_mat1 > CTS::MATRIX_SIZE_MAX) {
+            return response(json_encode(array('error' => 'Matrix 1 size is too big')), Cts::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if ($no_rows_mat2 > CTS::MATRIX_SIZE_MAX || $no_cols_mat2 > CTS::MATRIX_SIZE_MAX) {
+            return response(json_encode(array('error' => 'Matrix 2 size is too big')), Cts::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+
         if ($no_cols_mat1 != $no_rows_mat2) {
             return response(json_encode(array('error' => 'Matrices cannot be multiplied')), Cts::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         //check if matrix mul already cached
 
-        $mat1_serial = serialize($mat1);
-        $mat2_serial = serialize($mat2);
+        $mat1_serial = serialize($mat1); //used later
+        $mat2_serial = serialize($mat2);  //used later
         $cached = MatrixLog::where('mat1', '=', $mat1_serial)->where('mat2', '=', $mat2_serial)->first();
 
 
-        if (!$cached) {
+        if (!$cached || !$enable_caching) {
             //loop through all rows of mat1
             for ($i = 0; $i <= sizeof($mat1) - 1; $i++) {
                 if (sizeof($mat1[$i]) != $no_cols_mat1) {
@@ -102,15 +128,18 @@ class MatrixContoller extends Controller
                         $sum += ($mat1[$i][$k] * $mat2[$k][$j]);
                     }
 //              echo "sum:". $sum."<BR>";
-                    $res[$i][] = $sum; //i is taken as it mat1 will have same number of rows as the result
+                    $res[$i][Helper::intToLetters($j)] = $sum; //i is taken as it mat1 will have same number of rows as the result
                 }
 
-                $log = new MatrixLog;
-                $log->mat1 = $mat1_serial;
-                $log->mat2 = $mat2_serial;
-                $log->result = serialize($res);
-                $log->save();
+
             }
+
+            //cache results
+            $log = new MatrixLog;
+            $log->mat1 = $mat1_serial;
+            $log->mat2 = $mat2_serial;
+            $log->result = serialize($res);
+            $log->save();
         }
         else { //found in cache
             $res = unserialize($cached->result);

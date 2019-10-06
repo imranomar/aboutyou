@@ -1,5 +1,8 @@
 <?php
 
+//enable strict typing
+declare(strict_types=1);
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
