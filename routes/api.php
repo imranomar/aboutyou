@@ -16,9 +16,6 @@ use Illuminate\Hashing\BcryptHasher;
 |
 */
 
-
-
-//Route::middleware('AuthBasic')->post('/multiply', 'MatrixContoller@multiply')->name('mul');
 Route::middleware('AuthBasic')->post('/multiply', 'MatrixController@multiply')->name('mul');
 
 Route::post('register', function (Request $request)

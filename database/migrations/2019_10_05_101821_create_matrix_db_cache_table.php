@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMatrixLogsTable extends Migration
+class CreateMatrixDbCacheTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMatrixLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('matrix_logs', function (Blueprint $table) {
+        Schema::create('matrixDbCache', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->longText('mat1');
             $table->longText('mat2');

@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Cts;
+use App\Classes\Cts;
 use Illuminate\Contracts\Validation\Rule;
 
 class MatrixValidationRules implements Rule

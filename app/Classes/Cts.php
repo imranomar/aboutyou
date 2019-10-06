@@ -1,18 +1,12 @@
 <?php
 
 
-namespace App;
+namespace App\Classes;
 
 //Constants Class
 
 class Cts
 {
-    const NODE_CAN_LINK_TO_ITSELF = false;
-    const UNI_DIRECTION_ONLY = true;
-    const MILTI_EDGE_BETWEEN_2_NODES = false;
-    const ALLOW_STRANDED_NODES = false;
-    const MAX_NODES_REQUESTED = 100;
-
     //http statuses
     const HTTP_STATUS_OK = 200;
     const HTTP_STATUS_CREATED = 201;
@@ -23,5 +17,4 @@ class Cts
 
     //matrix
     const MATRIX_SIZE_MAX = 1000;
-
 }

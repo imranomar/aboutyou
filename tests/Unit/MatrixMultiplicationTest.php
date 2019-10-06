@@ -41,7 +41,7 @@ class MatrixMultiplicationTest extends TestCase
         $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
     }
 
-    //3*3 - 2*3
+    //3*3 - 2*3 - cannot be multiplied
     public function test3()
     {
         $data_sent = [

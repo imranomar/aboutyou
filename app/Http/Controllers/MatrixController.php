@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Cts;
-use App\Helper;
-use App\MatrixLog;
+use App\Classes\MatrixDatabaseCache;
+use App\Classes\Cts;
+use App\Classes\Helper;
 use App\MatrixMultiply;
 use Illuminate\Http\Request;
 use App\Http\Requests\MartixValidationRequest;
@@ -16,11 +16,20 @@ class MatrixController extends Controller
     {
         try
         {
-            return json_encode(MatrixMultiply::multiply(json_decode($r->mat1),json_decode($r->mat2)));
-        }
-        catch(\Exception $e)
-        {
+            $cached = MatrixDatabaseCache::read($r->mat1, $r->mat2);
+            if (!$cached) {
+                //cache results
+                $res = MatrixMultiply::multiply(json_decode($r->mat1),json_decode($r->mat2));
+                MatrixDatabaseCache::write($r->mat1, $r->mat2,$res);
+                return $res;
+            }
+            else {
+                return  json_encode(unserialize($cached->result));
+            }
 
+        }
+        catch(\Exception $e) {
+                return response(json_encode(array('error' => $e->getMessage())), $e->getCode());
         }
 
     }
