@@ -6,11 +6,12 @@ use App\Cts;
 use App\Helper;
 use App\MatrixLog;
 use Illuminate\Http\Request;
+use App\Http\Requests\MartixValidationRequest;
 
 class MatrixController extends Controller
 {
 
-    public function multiply(Request $r)
+    public function multiply(MartixValidationRequest $r)
     {
         //[[[1,2],[3,4]],[[1,2],[3,4]]]
         //    echo "<pre>";
@@ -19,41 +20,17 @@ class MatrixController extends Controller
         $res = array(); //array to store the result
 
         $mat1 = json_decode($r->mat1);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            return response(json_encode(array('error' => 'Invalid Json for Matrix 1')), Cts::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
         $mat2 = json_decode($r->mat2);
 
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            return response(json_encode(array('error' => 'Invalid Json for Matrix 2')), Cts::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        if (!is_array($mat1)) {
-            return response(json_encode(array('error' => 'Matrix 1 could not be created')), Cts::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        if (!is_array($mat2)) {
-            return response(json_encode(array('error' => 'Matrix 2 could not be created')), Cts::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        if (sizeof($mat1) == 0) {
-            return response(json_encode(array('error' => 'Matrix 1 is empty')), Cts::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        if (sizeof($mat2) == 0) {
-            return response(json_encode(array('error' => 'Matrix 2 is empty')), Cts::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
+        //get columns of matrix 1
         if (is_array($mat1[0])) {
             $no_cols_mat1 = sizeof($mat1[0]);
         } else {//support [3]*[5] also instead of [[3]]*[[5]] only
-
             $mat1[0] = array($mat1[0]);
             $no_cols_mat1 = 1;
         }
 
+        //get columns of matrix 2
         if (is_array($mat2[0])) {
             $no_cols_mat2 = sizeof($mat2[0]);
         } else { //support [3]*[5] also instead of [[3]]*[[5]] only
@@ -62,33 +39,17 @@ class MatrixController extends Controller
             $no_cols_mat2 = 1;
         }
 
+        //get number of rows of both matrix
         $no_rows_mat1 = sizeof($mat1);
         $no_rows_mat2 = sizeof($mat2);
 
-        if ($no_cols_mat1 == 0) {
-            return response(json_encode(array('error' => 'Matrix 1 first row is empty')), Cts::HTTP_UNPROCESSABLE_ENTITY);
-        }
 
-        if ($no_cols_mat2 == 0) {
-            return response(json_encode(array('error' => 'Matrix 2 second row is empty')), Cts::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-
-        if ($no_rows_mat1 > CTS::MATRIX_SIZE_MAX || $no_cols_mat1 > CTS::MATRIX_SIZE_MAX) {
-            return response(json_encode(array('error' => 'Matrix 1 size is too big')), Cts::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        if ($no_rows_mat2 > CTS::MATRIX_SIZE_MAX || $no_cols_mat2 > CTS::MATRIX_SIZE_MAX) {
-            return response(json_encode(array('error' => 'Matrix 2 size is too big')), Cts::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-
+        //throw error if matrices are not compatible for multiplication
         if ($no_cols_mat1 != $no_rows_mat2) {
             return response(json_encode(array('error' => 'Matrices cannot be multiplied')), Cts::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         //check if matrix mul already cached
-
         $mat1_serial = serialize($mat1); //used later
         $mat2_serial = serialize($mat2);  //used later
         $cached = MatrixLog::where('mat1', '=', $mat1_serial)->where('mat2', '=', $mat2_serial)->first();
