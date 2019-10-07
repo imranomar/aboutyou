@@ -120,8 +120,6 @@ class MatrixMultiply
                 $res[$p] = array_fill(0, $no_cols_mat2, null)  ;
         }
 
-
-
         //Throw error if matrices are not compatible for multiplication
         if ($no_cols_mat1 != $no_rows_mat2) {
             throw new MatrixAppException('Matrices cannot be multiplied', Cts::HTTP_UNPROCESSABLE_ENTITY);
@@ -134,8 +132,8 @@ class MatrixMultiply
             }
 
             $row_of_mat1 = $mat1[$i];
-            //Repeat for number of cols in mat2
 
+            //Repeat for number of cols in mat2
             for ($j = 0; $j <= (ceil($no_cols_mat2 / 2)-1); $j++) {
 
                 $sum = 0;
@@ -152,8 +150,6 @@ class MatrixMultiply
                             throw new MatrixAppException('Matrix 2 - uneven row lengths', Cts::HTTP_UNPROCESSABLE_ENTITY);
                         }
                     }
-
-//                  echo $mat1[$i][$k] . " " . $mat2[$k][$j] . "<BR>";
 
                     if (!is_numeric($mat1[$i][$k])) {
                         throw new MatrixAppException('Non numerical entity encountered in Matrix 1',
