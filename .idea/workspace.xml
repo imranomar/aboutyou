@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ecd2a8ee-0736-4a55-9ed4-df5b27cd9d01" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Classes/MatrixDatabaseCache.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Classes/MatrixDatabaseCache.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Classes/MatrixMultiply.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Classes/MatrixMultiply.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MatrixController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MatrixController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/MatrixDbCacheModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/MatrixDbCacheModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Unit/HelperTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/HelperTest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/Unit/MatrixMultiplicationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Unit/MatrixMultiplicationTest.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,11 +38,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Classes/MatrixMultiply.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="47" column="16" lean-forward="true" selection-start-line="47" selection-start-column="16" selection-end-line="55" selection-end-column="17" />
+            <state relative-caret-position="2926">
+              <caret line="133" selection-start-line="133" selection-end-line="133" />
             </state>
           </provider>
         </entry>
@@ -60,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/Unit/MatrixMultiplicationTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="985">
-              <caret line="78" column="23" lean-forward="true" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="40" />
+            <state relative-caret-position="580">
+              <caret line="181" column="39" selection-start-line="181" selection-start-column="39" selection-end-line="181" selection-end-column="39" />
               <folding>
                 <element signature="e#30#80#0#PHP" expanded="true" />
               </folding>
@@ -84,8 +80,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MatrixController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+            <state relative-caret-position="616">
+              <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
               <folding>
                 <element signature="e#40#76#0#PHP" expanded="true" />
               </folding>
@@ -136,9 +132,9 @@
         <option value="$PROJECT_DIR$/tests/Unit/HelperTest.php" />
         <option value="$PROJECT_DIR$/tests/Unit/MiddlewareTest.php" />
         <option value="$PROJECT_DIR$/routes/api.php" />
-        <option value="$PROJECT_DIR$/tests/Unit/MatrixMultiplicationTest.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/MatrixController.php" />
         <option value="$PROJECT_DIR$/app/Classes/MatrixMultiply.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/MatrixController.php" />
+        <option value="$PROJECT_DIR$/tests/Unit/MatrixMultiplicationTest.php" />
       </list>
     </option>
   </component>
@@ -376,18 +372,19 @@
       <workItem from="1570439046622" duration="1786000" />
       <workItem from="1570440855364" duration="1787000" />
       <workItem from="1570442663272" duration="1578000" />
-      <workItem from="1570444497601" duration="1131000" />
+      <workItem from="1570444497601" duration="1783000" />
+      <workItem from="1570446302406" duration="1125000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44932000" />
+    <option name="totallyTimeSpent" value="46709000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5815832" visible="true" weight="0.23027718" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5815832" visible="true" weight="0.23294243" />
       <window_info id="npm" order="1" side_tool="true" />
       <window_info id="Favorites" order="2" sideWeight="0.4184168" side_tool="true" weight="0.14712153" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -401,7 +398,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.503792" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" weight="0.12892741" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49946696" visible="true" weight="0.12892741" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.36403033" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -647,10 +644,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
+    <entry file="file://$PROJECT_DIR$/app/Classes/MatrixMultiply.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="19" column="61" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="61" />
+        <state relative-caret-position="2926">
+          <caret line="133" selection-start-line="133" selection-end-line="133" />
         </state>
       </provider>
     </entry>
@@ -661,10 +658,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="19" column="61" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/MatrixController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+        <state relative-caret-position="616">
+          <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
           <folding>
             <element signature="e#40#76#0#PHP" expanded="true" />
           </folding>
@@ -673,18 +677,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/Unit/MatrixMultiplicationTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="985">
-          <caret line="78" column="23" lean-forward="true" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="40" />
+        <state relative-caret-position="580">
+          <caret line="181" column="39" selection-start-line="181" selection-start-column="39" selection-end-line="181" selection-end-column="39" />
           <folding>
             <element signature="e#30#80#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Classes/MatrixMultiply.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="47" column="16" lean-forward="true" selection-start-line="47" selection-start-column="16" selection-end-line="55" selection-end-column="17" />
         </state>
       </provider>
     </entry>

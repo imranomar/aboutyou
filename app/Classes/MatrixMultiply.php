@@ -8,7 +8,6 @@ class MatrixMultiply
 {
     public static function multiply($mat1 , $mat2)
     {
-        echo "<pre>";
         $res = array(); //array to store the result
 
         //Get columns of matrix 1
@@ -45,19 +44,19 @@ class MatrixMultiply
             $row_of_mat1 = $mat1[$i];
             //Repeat for number of cols in mat2
             for ($j = 0; $j <= $no_cols_mat2 - 1; $j++) {
-                //Check of the no of col of row of mat2 is right and do it only once
-                if ($i == 0) {
-                    print_r($mat2);
-                    echo "xx".$j.sizeof($mat2[$i])."asd";
 
-                    if (sizeof($mat2[$i]) != $no_cols_mat2) {
-                        throw new \Exception('Matrix 2 - uneven row lengths',Cts::HTTP_UNPROCESSABLE_ENTITY);
-                    }
-                }
 
                 $sum = 0;
                 //Loop through values of a row of mat1
                 for ($k = 0; $k <= sizeof($row_of_mat1) - 1; $k++) {
+
+                    //Check of the no of col of row of mat2 is right and do it only once per row
+                    if ($i == 0 && $j == 0) {
+                        if (sizeof($mat2[$k]) != $no_cols_mat2) {
+                            throw new \Exception('Matrix 2 - uneven row lengths',Cts::HTTP_UNPROCESSABLE_ENTITY);
+                        }
+                    }
+
 //                  echo $mat1[$i][$k] . " " . $mat2[$k][$j] . "<BR>";
 
                     if (!is_numeric($mat1[$i][$k])) {
@@ -73,7 +72,6 @@ class MatrixMultiply
                 $res[$i][Helper::intToLetters($j)] = $sum; //i is taken as it mat1 will have same number of rows as the result
             }
         }
-        echo "</pre>";
         return $res;
     }
 
@@ -123,12 +121,7 @@ class MatrixMultiply
             $row_of_mat1 = $mat1[$i];
             //Repeat for number of cols in mat2
             for ($j = 0; $j <= (ceil($no_cols_mat2/2) - 1); $j++) {
-                //Check of the no of col of row of mat2 is right and do it only once
-                if ($i == 0) {
-                    if (sizeof($mat2[$j]) != $no_cols_mat2) {
-                        throw new \Exception('Matrix 2 - uneven row lengths',Cts::HTTP_UNPROCESSABLE_ENTITY);
-                    }
-                }
+
 
                 $sum = 0;
                 $sum2 = 0;
@@ -137,6 +130,13 @@ class MatrixMultiply
                 //Loop through values of a row of mat1
 
                 for ($k = 0; $k <= ceil($no_rows_mat1/2); $k++) {
+                    //Check of the no of col of row of mat2 is right and do it only once
+
+                    if ($i == 0 && $j == 0) {
+                        if (sizeof($mat2[$k]) != $no_cols_mat2) {
+                            throw new \Exception('Matrix 2 - uneven row lengths',Cts::HTTP_UNPROCESSABLE_ENTITY);
+                        }
+                    }
 
 //                  echo $mat1[$i][$k] . " " . $mat2[$k][$j] . "<BR>";
 

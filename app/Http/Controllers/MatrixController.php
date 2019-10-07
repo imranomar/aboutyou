@@ -31,9 +31,7 @@ class MatrixController extends Controller
             }
         }
         catch(\Exception $e) {
-            echo $e->getLine();
-
-                return response(json_encode(array('error' => $e->getMessage(). " on ". $e->getLine())), $e->getCode());
+            return response(json_encode(array('error' => $e->getMessage())), $e->getCode());
         }
 
     }
@@ -48,7 +46,7 @@ class MatrixController extends Controller
             $cached = MatrixDatabaseCache::read($mat1, $mat2);
             if (!$cached) {
                 //cache results
-                $res = MatrixMultiply::multiply($mat1,$mat2);
+                $res = MatrixMultiply::multiplyquick($mat1,$mat2);
                 MatrixDatabaseCache::write($mat1, $mat2, $res);
                 return  json_encode(array('error'=>'','cached'=>'false','result'=>$res));
             }

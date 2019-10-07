@@ -83,8 +83,71 @@ class MatrixMultiplicationTest extends TestCase
         $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
     }
 
+    //3*2 - 3*2
+    public function test6()
+    {
+        $this->withoutMiddleware();
+        $data_sent = [
+            'mat1' => "[[1,2],[3,4],[5,6]]",
+            'mat2' => "[[1,2],[3,4],[5,6]]",
+        ];
+        $expected = array('error'=>'Matrices cannot be multiplied');
+        $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
+    }
+
+    //2*3 - 3*3
+    public function test7()
+    {
+        $this->withoutMiddleware();
+        $data_sent = [
+            'mat1' => "[[1,2,3],[3,4,5]]",
+            'mat2' => "[[1,2,3],[4,5,6],[7,8,9]]",
+        ];
+        $result = array(array('A'=>30,'B'=>36,'C'=>42),array('A'=>66,'B'=>81,'C'=>96));
+        $expected = array('error'=>'', 'cached'=>'false', 'result'=>$result);
+        $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+    }
+
+    //3*2 - 3*3 - cannot be multiplied
+    public function test8()
+    {
+        $this->withoutMiddleware();
+        $data_sent = [
+            'mat1' => "[[1,2],[4,5],[7,8]]",
+            'mat2' => "[[1,2,3],[4,5,6],[7,8,9]]",
+        ];
+        $expected = array('error'=>'Matrices cannot be multiplied');
+        $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
+    }
+
+    //3*2 - 2*2
+    public function test9()
+    {
+        $this->withoutMiddleware();
+        $data_sent = [
+            'mat1' => "[[1,2],[3,4],[5,6]]",
+            'mat2' => "[[1,2],[3,4]]",
+        ];
+        $result = array(array('A'=>7,'B'=>10),array('A'=>15,'B'=>22),array('A'=>23,'B'=>34));
+        $expected = array('error'=>'', 'cached'=>'false', 'result'=>$result);
+        $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+    }
+
+
+    //2*3 - 2*2- cannot be multiplied
+    public function test10()
+    {
+        $this->withoutMiddleware();
+        $data_sent = [
+            'mat1' => "[[1,2,3],[4,5,6]]",
+            'mat2' => "[[1,2],[3,4]]",
+        ];
+        $expected = array('error'=>'Matrices cannot be multiplied');
+        $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
+    }
+
     //3*3 - 2*3 - cannot be multiplied
-    public function test23()
+    public function test11()
     {
         $this->withoutMiddleware();
         $data_sent = [
@@ -94,5 +157,32 @@ class MatrixMultiplicationTest extends TestCase
         $expected = array('error'=>'Matrices cannot be multiplied');
         $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
     }
+
+    //3*3 - 3*2 - cannot be multiplied
+    public function test12()
+    {
+        $this->withoutMiddleware();
+        $data_sent = [
+            'mat1' => "[[1,2,3],[4,5,6],[7,8,9]]",
+            'mat2' => "[[1,2],[3,4],[5,6]]",
+        ];
+        $result = array(array('A'=>22,'B'=>28),array('A'=>49,'B'=>64),array('A'=>76,'B'=>100));
+        $expected = array('error'=>'', 'cached'=>'false', 'result'=>$result);
+        $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+    }
+
+    //1*3 - 3*1 - cannot be multiplied
+    public function test13()
+    {
+        $this->withoutMiddleware();
+        $data_sent = [
+            'mat1' => "[[1,2,3]]",
+            'mat2' => "[[1],[2],[3]]",
+        ];
+        $result = array(array('A'=>14));
+        $expected = array('error'=>'', 'cached'=>'false', 'result'=>$result);
+        $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+    }
+
 
 }
