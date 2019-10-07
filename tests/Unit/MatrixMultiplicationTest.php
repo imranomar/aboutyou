@@ -100,7 +100,7 @@ class MatrixMultiplicationTest extends TestCase
     {
         $this->withoutMiddleware();
         $data_sent = [
-            'mat1' => "[[1,2,3],[3,4,5]]",
+            'mat1' => "[[1,2,3],[4,5,6]]",
             'mat2' => "[[1,2,3],[4,5,6],[7,8,9]]",
         ];
         $result = array(array('A'=>30,'B'=>36,'C'=>42),array('A'=>66,'B'=>81,'C'=>96));
@@ -182,6 +182,18 @@ class MatrixMultiplicationTest extends TestCase
         $result = array(array('A'=>14));
         $expected = array('error'=>'', 'cached'=>'false', 'result'=>$result);
         $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+    }
+
+    //2*3 - 2*2- incorrect json format
+    public function test14()
+    {
+        $this->withoutMiddleware();
+        $data_sent = [
+            'mat1' => "[[1,2,3][4,5,6]]", //missing comma to test json
+            'mat2' => "[[1,2],[3,4]]",
+        ];
+        $expected = array('Matrix is not in proper json format');
+        $this->post(route('mul'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJsonFragment($expected);
     }
 
 

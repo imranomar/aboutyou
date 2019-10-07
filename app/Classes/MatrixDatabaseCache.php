@@ -4,6 +4,7 @@
 namespace App\Classes;
 use App\Interfaces\iCache;
 use App\MatrixDBCacheModel;
+use Illuminate\Support\Facades\Hash;
 
 class MatrixDatabaseCache implements iCache
 {
@@ -15,10 +16,17 @@ class MatrixDatabaseCache implements iCache
     {
         $result = array();
 
-        $found = MatrixDBCacheModel::where('mat1','=',json_encode($mat1))->where('mat2','=',json_encode($mat2))->first();
-        if($found)
+        $json_mat1 = json_encode($mat1);
+        $json_mat2 =  json_encode($mat2);
+
+        $found = MatrixDBCacheModel::where('mat1first100chars','=',substr($json_mat1,0,100))
+            ->where('mat2first100chars','=',substr($json_mat2,0,100))->get();
+        foreach($found as $matrix)
         {
-            $result =  json_decode($found->result);
+            if($matrix->mat1 == $json_mat1 && $matrix->mat2 == $json_mat2 )
+            {
+                $result = json_decode($matrix->result);
+            }
         }
         return $result;
     }
@@ -29,8 +37,12 @@ class MatrixDatabaseCache implements iCache
     public static function write( $mat1, $mat2, $result)
     {
         $cache = new MatrixDBCacheModel;
-        $cache->mat1 = json_encode($mat1);
-        $cache->mat2 = json_encode($mat2);
+        $json_mat1 = json_encode($mat1);
+        $json_mat2 =  json_encode($mat2);
+        $cache->mat1 = $json_mat1;
+        $cache->mat2 = $json_mat2;
+        $cache->mat1first100chars = substr($json_mat1,0,100);
+        $cache->mat2first100chars = substr($json_mat2,0,100);
         $cache->result = json_encode($result);
         $cache->save();
     }

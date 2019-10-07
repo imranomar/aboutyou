@@ -31,7 +31,8 @@ class MatrixController extends Controller
             }
         }
         catch(\Exception $e) {
-            return response(json_encode(array('error' => $e->getMessage())), $e->getCode());
+            $code = Helper::isValidHttpStatusCode($e->getCode()) ? $e->getCode() : 500;
+            return response(json_encode(array('error' => $e->getMessage())), $code);
         }
 
     }
@@ -56,8 +57,8 @@ class MatrixController extends Controller
 
         }
         catch(\Exception $e) {
-            echo $e->getMessage();
-            return response(json_encode(array('error' => $e->getMessage())), $e->getCode());
+            $code = Helper::isValidHttpStatusCode($e->getCode()) ? $e->getCode() : 500;
+            return response(json_encode(array('error' => $e->getMessage())), $code);
         }
 
     }

@@ -13,11 +13,14 @@ class CreateMatrixDbCacheTable extends Migration
      */
     public function up()
     {
-        Schema::create('matrixDbCache', function (Blueprint $table) {
+        Schema::create('matrix_db_cache', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->longText('mat1');
             $table->longText('mat2');
+            $table->string('mat1first100chars')->index();
+            $table->string('mat2first100chars')->index();
             $table->longText('result');
+            $table->index(array('mat1first100chars','mat2first100chars'));
             $table->timestamps();
         });
     }
