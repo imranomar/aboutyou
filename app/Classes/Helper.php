@@ -11,12 +11,25 @@ class Helper
     //int to alphabets
     public static function intToLetters(int $no): String
     {
+        $string = '';
+
+        if ($no==0) {
+            return '0';
+        }
         $alphas = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-        $count = sizeof($alphas);
-        $repeat = (int)($no / $count);
-        $mod = $no % $count;
-        $string = str_repeat("A",$repeat) . $alphas[$mod];
-        return $string;
+
+        if ($no<=26) {
+            return $alphas[$no-1];
+        }
+        else
+        {
+            $repeats = $no / 26;
+            $string = str_repeat("A",(int)$repeats);
+            $mod = $no % 26;
+            $string .= $alphas[$mod-1];
+            return $string;
+        }
+
     }
 
     public static function isValidHttpStatusCode(String $status_code): bool
