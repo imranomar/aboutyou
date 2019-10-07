@@ -19,7 +19,7 @@ NOTE: Has been created with Laravel 5.8 , PHP 7.2
 
 NOTE: The API is available online viewed at (coming soon)
 
-NOTE: Api documentation can be found here at https://documenter.getpostman.com/view/7566754/SVtSV9N5?version=latest
+NOTE: Api documentation can be found here at:
 
 https://documenter.getpostman.com/view/7566754/SVtSV9N5?version=latest
 
