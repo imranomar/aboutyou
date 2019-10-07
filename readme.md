@@ -8,7 +8,9 @@ Introduction
 
 Api takes 2 matrices and multiplies them and returns the result. End point e.g. http://localhost/api/multiply
 
-Api introduces another faster multiplication algo that multiplies in 1/4th of the time to linear multiplication. End point e.g. http://localhost/api/multiplyquick [ Had time so was thinking about how could the algo be made more efficient ]
+Api introduces another faster multiplication algo that multiplies in 1/4th of the time to linear multiplication. Had time so was thinking about how could the algo be made more efficient.
+
+End point e.g. http://localhost/api/multiplyquick
 
 API Documentation
 =============
