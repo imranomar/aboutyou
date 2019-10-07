@@ -43,14 +43,15 @@ class MatrixController extends Controller
             $mat2 = json_decode($r->mat2);
             //search for matrices in db
             $cached = MatrixDatabaseCache::read($mat1, $mat2);
-            if ($cached) {
+//            if (!$cached) {
+
                 //cache results
                 $res = MatrixMultiply::multiplyquick($mat1, $mat2);
                 MatrixDatabaseCache::write($mat1, $mat2, $res);
                 return json_encode(array('error' => '', 'cached' => 'false', 'result' => $res));
-            } else {
-                return json_encode(array('error' => '', 'cached' => 'true', 'result' => $cached));
-            }
+//            } else {
+//                return json_encode(array('error' => '', 'cached' => 'true', 'result' => $cached));
+//            }
 
         } catch (\Exception $e) {
             $code = Helper::isValidHttpStatusCode($e->getCode()) ? $e->getCode() : 500;

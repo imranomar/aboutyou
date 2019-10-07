@@ -91,7 +91,6 @@ class MatrixMultiply
     */
     public static function multiplyQuick($mat1, $mat2)
     {
-
         $res = array(); //array to store the result
 
         //Get columns & rows of matrix 1
@@ -117,8 +116,12 @@ class MatrixMultiply
         //initialize empty result array
         $res = array_fill(0, $no_rows_mat1, null);
         for ($p = 0; $p <= $no_rows_mat1 - 1; $p++) {
-            $res[$p] = array_fill(0, $no_cols_mat2, null);
+            for ($q = 0; $q <= $no_cols_mat2 - 1; $q++) {
+                $res[$p][Helper::intToLetters($q)] = null ;
+            }
         }
+
+
 
         //Throw error if matrices are not compatible for multiplication
         if ($no_cols_mat1 != $no_rows_mat2) {
@@ -133,15 +136,16 @@ class MatrixMultiply
 
             $row_of_mat1 = $mat1[$i];
             //Repeat for number of cols in mat2
-            for ($j = 0; $j <= (ceil($no_cols_mat2 / 2) - 1); $j++) {
+
+            for ($j = 0; $j <= (ceil($no_cols_mat2 / 2)-1); $j++) {
 
                 $sum = 0;
                 $sum2 = 0;
                 $sum3 = 0;
                 $sum4 = 0;
-                //Loop through values of a row of mat1
 
-                for ($k = 0; $k <= ceil($no_rows_mat1 / 2); $k++) {
+                //Loop through values of a row of mat1
+                for ($k = 0; $k <= ceil($no_cols_mat1 / 2)  ; $k++) { //add +1 here
                     //Check of the no of col of row of mat2 is right and do it only once
 
                     if ($i == 0 && $j == 0) {
@@ -168,13 +172,12 @@ class MatrixMultiply
                     $sum4 += ($mat1[$no_rows_mat1 - $i - 1][$k] * $mat2[$k][$no_cols_mat2 - $j - 1]);
                 }
 
-                $res[$i][$j] = $sum; //i is taken as it mat1 will have same number of rows as the result
-                $res[$no_rows_mat1 - $i - 1][$j] = $sum2;
-                $res[$no_rows_mat1 - $i - 1][$no_cols_mat2 - $j - 1] = $sum4;
-                $res[$i][$no_cols_mat2 - $j - 1] = $sum3;
+                $res[$i][Helper::intToLetters($j)] = $sum; //i is taken as it mat1 will have same number of rows as the result
+                $res[$no_rows_mat1 - $i - 1][Helper::intToLetters($j)] = $sum2;
+                $res[$no_rows_mat1 - $i - 1][Helper::intToLetters($no_cols_mat2 - $j - 1)] = $sum4;
+                $res[$i][Helper::intToLetters($no_cols_mat2 - $j - 1)] = $sum3;
             }
         }
-
         return $res;
     }
 }

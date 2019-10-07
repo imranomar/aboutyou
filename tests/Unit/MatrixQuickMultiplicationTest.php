@@ -109,7 +109,7 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat1' => "[[1,2,3],[4,5,6]]",
             'mat2' => "[[1,2,3],[4,5,6],[7,8,9]]",
         ];
-        $result = array(array('A' => 30, 'B' => 36, 'C' => 42), array('A' => 66, 'B' => 81, 'C' => 96));
+        $result = array(array('A'=>30, 'B' => 36, 'C' => 42), array('A' => 66, 'B' => 81, 'C' => 96));
         $expected = array('error' => '', 'cached' => 'false', 'result' => $result);
         $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
     }
