@@ -17,7 +17,7 @@ use App\User;
 */
 
 Route::middleware('AuthBasic')->post('/multiply', 'MatrixController@multiply')->name('mul');
-Route::post('/multiplyquick', 'MatrixController@multiplyQuick')->name('mulquick');
+Route::post('/multiplyquick', 'MatrixController@multiplyQuick')->name('mulQuick');
 
 //Register User
 Route::post('register', function (Request $request) {

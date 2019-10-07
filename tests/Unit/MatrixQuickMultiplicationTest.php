@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Classes\Cts;
+use App\Classes\Helper;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -25,9 +26,10 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat1' => "[[1,2],[3,4]]",
             'mat2' => "[[1,2],[3,4]]",
         ];
-        $result = array(array('A' => 7, 'B' => 10), array('A' => 15, 'B' => 22));
+        $result = array(array(Helper::intToLetters(7), Helper::intToLetters(10)),
+            array(Helper::intToLetters(15), Helper::intToLetters(22)));
         $expected = array('error' => '', 'cached' => 'false', 'result' => $result);
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
     }
 
     //3*3 - 3*3
@@ -39,12 +41,13 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat2' => "[[1,2,3],[4,5,6],[7,8,9]]",
         ];
         $result = array(
-            array('A' => 30, 'B' => 36, 'C' => 42),
-            array('A' => 66, 'B' => 81, 'C' => 96),
-            array('A' => 102, 'B' => 126, 'C' => 150)
+            array(Helper::intToLetters(30), Helper::intToLetters(36),Helper::intToLetters(42)),
+            array(Helper::intToLetters(66), Helper::intToLetters(81), Helper::intToLetters(96)),
+            array(Helper::intToLetters(102), Helper::intToLetters(126), Helper::intToLetters(150))
         );
         $expected = array('error' => '', 'cached' => 'false', 'result' => $result);
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)
+            ->assertJson($expected);
     }
 
     //2*3 - 2*3 - cannot be multiplied
@@ -56,7 +59,8 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat2' => "[[1,2,3],[4,5,6]]",
         ];
         $expected = array('error' => 'Matrices cannot be multiplied');
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJson($expected);
     }
 
     //2*3 - 3*2
@@ -67,9 +71,10 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat1' => "[[1,2,3],[4,5,6]]",
             'mat2' => "[[1,2],[3,4],[5,6]]",
         ];
-        $result = array(array('A' => 22, 'B' => 28), array('A' => 49, 'B' => 64));
+        $result = array(array(Helper::intToLetters(22), Helper::intToLetters(28)),
+            array(Helper::intToLetters(49), Helper::intToLetters(64)));
         $expected = array('error' => '', 'cached' => 'false', 'result' => $result);
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
     }
 
     //3*2 - 2*3
@@ -81,12 +86,11 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat2' => "[[1,2,3],[4,5,6]]",
         ];
         $result = array(
-            array('A' => 9, 'B' => 12, 'C' => 15),
-            array('A' => 19, 'B' => 26, 'C' => 33),
-            array('A' => 29, 'B' => 40, 'C' => 51)
-        );
+            array(Helper::intToLetters(9), Helper::intToLetters(12), Helper::intToLetters(15)),
+            array(Helper::intToLetters(19), Helper::intToLetters(26), Helper::intToLetters(33)),
+            array(Helper::intToLetters(29), Helper::intToLetters(40), Helper::intToLetters(51)));
         $expected = array('error' => '', 'cached' => 'false', 'result' => $result);
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
     }
 
     //3*2 - 3*2
@@ -98,7 +102,8 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat2' => "[[1,2],[3,4],[5,6]]",
         ];
         $expected = array('error' => 'Matrices cannot be multiplied');
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJson($expected);
     }
 
     //2*3 - 3*3
@@ -109,9 +114,10 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat1' => "[[1,2,3],[4,5,6]]",
             'mat2' => "[[1,2,3],[4,5,6],[7,8,9]]",
         ];
-        $result = array(array('A'=>30, 'B' => 36, 'C' => 42), array('A' => 66, 'B' => 81, 'C' => 96));
+        $result = array(array(Helper::intToLetters(30), Helper::intToLetters(36), Helper::intToLetters(42)),
+            array(Helper::intToLetters(66), Helper::intToLetters(81), Helper::intToLetters(96)));
         $expected = array('error' => '', 'cached' => 'false', 'result' => $result);
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
     }
 
     //3*2 - 3*3 - cannot be multiplied
@@ -123,7 +129,8 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat2' => "[[1,2,3],[4,5,6],[7,8,9]]",
         ];
         $expected = array('error' => 'Matrices cannot be multiplied');
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJson($expected);
     }
 
     //3*2 - 2*2
@@ -134,9 +141,11 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat1' => "[[1,2],[3,4],[5,6]]",
             'mat2' => "[[1,2],[3,4]]",
         ];
-        $result = array(array('A' => 7, 'B' => 10), array('A' => 15, 'B' => 22), array('A' => 23, 'B' => 34));
+        $result = array(array(Helper::intToLetters(7), Helper::intToLetters(10)),
+            array(Helper::intToLetters(15), Helper::intToLetters(22)),
+            array(Helper::intToLetters(23), Helper::intToLetters(34)));
         $expected = array('error' => '', 'cached' => 'false', 'result' => $result);
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
     }
 
 
@@ -149,7 +158,7 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat2' => "[[1,2],[3,4]]",
         ];
         $expected = array('error' => 'Matrices cannot be multiplied');
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
     }
 
     //3*3 - 2*3 - cannot be multiplied
@@ -161,10 +170,10 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat2' => "[[1,2,3],[4,5,6]]",
         ];
         $expected = array('error' => 'Matrices cannot be multiplied');
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJson($expected);
     }
 
-    //3*3 - 3*2 - cannot be multiplied
+    //3*3 - 3*2
     public function test12()
     {
         $this->withoutMiddleware();
@@ -172,9 +181,12 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat1' => "[[1,2,3],[4,5,6],[7,8,9]]",
             'mat2' => "[[1,2],[3,4],[5,6]]",
         ];
-        $result = array(array('A' => 22, 'B' => 28), array('A' => 49, 'B' => 64), array('A' => 76, 'B' => 100));
+        $result = array(array(Helper::intToLetters(22), Helper::intToLetters(28)),
+            array(Helper::intToLetters(49), Helper::intToLetters(64)),
+            array(Helper::intToLetters(76), Helper::intToLetters(100)));
+
         $expected = array('error' => '', 'cached' => 'false', 'result' => $result);
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
     }
 
     //1*3 - 3*1 - cannot be multiplied
@@ -185,9 +197,9 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat1' => "[[1,2,3]]",
             'mat2' => "[[1],[2],[3]]",
         ];
-        $result = array(array('A' => 14));
+        $result = array(array(Helper::intToLetters(14)));
         $expected = array('error' => '', 'cached' => 'false', 'result' => $result);
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
     }
 
     //2*3 - 2*2- incorrect json format
@@ -199,7 +211,7 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat2' => "[[1,2],[3,4]]",
         ];
         $expected = array('Matrix is not in proper json format');
-        $this->post(route('mulquick'),
+        $this->post(route('mulQuick'),
             $data_sent)->assertStatus(Cts::HTTP_UNPROCESSABLE_ENTITY)->assertJsonFragment($expected);
     }
 
@@ -212,8 +224,8 @@ class MatrixQuickMultiplicationTest extends TestCase
             'mat2' => "[[1],[2],[3]]",
         ];
 
-        $result = array(array('A' => 14));
+        $result = array(array(Helper::intToLetters(14)));
         $expected = array('error' => '', 'cached' => 'false', 'result' => $result);
-        $this->post(route('mulquick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
+        $this->post(route('mulQuick'), $data_sent)->assertStatus(Cts::HTTP_STATUS_OK)->assertJson($expected);
     }
 }

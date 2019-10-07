@@ -79,7 +79,7 @@ class MatrixMultiply
                     }
                     $sum += ($mat1[$i][$k] * $mat2[$k][$j]);
                 }
-                $res[$i][Helper::intToLetters($j)] = $sum; //i is taken as it mat1 will have same number of rows as the result
+                $res[$i][] = Helper::intToLetters($sum); //i is taken as it mat1 will have same number of rows as the result
             }
         }
         return $res;
@@ -117,9 +117,7 @@ class MatrixMultiply
         //initialize empty result array
         $res = array_fill(0, $no_rows_mat1, null);
         for ($p = 0; $p <= $no_rows_mat1 - 1; $p++) {
-            for ($q = 0; $q <= $no_cols_mat2 - 1; $q++) {
-                $res[$p][Helper::intToLetters($q)] = null ;
-            }
+                $res[$p] = array_fill(0, $no_cols_mat2, null)  ;
         }
 
 
@@ -173,10 +171,10 @@ class MatrixMultiply
                     $sum4 += ($mat1[$no_rows_mat1 - $i - 1][$k] * $mat2[$k][$no_cols_mat2 - $j - 1]);
                 }
 
-                $res[$i][Helper::intToLetters($j)] = $sum; //i is taken as it mat1 will have same number of rows as the result
-                $res[$no_rows_mat1 - $i - 1][Helper::intToLetters($j)] = $sum2;
-                $res[$no_rows_mat1 - $i - 1][Helper::intToLetters($no_cols_mat2 - $j - 1)] = $sum4;
-                $res[$i][Helper::intToLetters($no_cols_mat2 - $j - 1)] = $sum3;
+                $res[$i][$j] = Helper::intToLetters($sum); //i is taken as it mat1 will have same number of rows as the result
+                $res[$no_rows_mat1 - $i - 1][$j] = Helper::intToLetters($sum2);
+                $res[$no_rows_mat1 - $i - 1][$no_cols_mat2 - $j - 1] = Helper::intToLetters($sum4);
+                $res[$i][$no_cols_mat2 - $j - 1] = Helper::intToLetters($sum3);
             }
         }
         return $res;

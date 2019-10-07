@@ -14,34 +14,51 @@ class HelperTest extends TestCase
     public function test1()
     {
         $num = 0;
-        $expect = 'A';
+        $expect = '#';
         $actual = Helper::intToLetters($num);
         $this->assertEquals($expect, $actual);
     }
 
     public function test2()
     {
-        $num = 25;
-        $expect = 'Z';
+        $num = 1;
+        $expect = 'A';
         $actual = Helper::intToLetters($num);
         $this->assertEquals($expect, $actual);
     }
 
+
     public function test3()
     {
-        $num = 26;
-        $expect = 'AA';
+        $num = 25;
+        $expect = 'Y';
         $actual = Helper::intToLetters($num);
         $this->assertEquals($expect, $actual);
     }
 
     public function test4()
     {
-        $num = 27;
-        $expect = 'AB';
+        $num = 26;
+        $expect = 'Z';
         $actual = Helper::intToLetters($num);
         $this->assertEquals($expect, $actual);
     }
+//
+//    public function test5()
+//    {
+//        $num = 27;
+//        $expect = 'AA';
+//        $actual = Helper::intToLetters($num);
+//        $this->assertEquals($expect, $actual);
+//    }
+//
+//    public function test6()
+//    {
+//        $num = 27;
+//        $expect = 'AB';
+//        $actual = Helper::intToLetters($num);
+//        $this->assertEquals($expect, $actual);
+//    }
 
 
 }
