@@ -4,6 +4,7 @@
 namespace App\Classes;
 
 use http\Exception;
+use App\Exceptions\MatrixAppException;
 
 class MatrixMultiply
 {
@@ -38,7 +39,7 @@ class MatrixMultiply
 
         //Throw error if matrices are not compatible for multiplication
         if ($no_cols_mat1 != $no_rows_mat2) {
-            throw new \Exception('Matrices cannot be multiplied', Cts::HTTP_UNPROCESSABLE_ENTITY);
+            throw new MatrixAppException('Matrices cannot be multiplied', Cts::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         //Loop through all rows of mat1
@@ -47,7 +48,7 @@ class MatrixMultiply
             //check if all rows have the same length
             if ($no_rows_mat1 > 1) {
                 if (sizeof($mat1[$i]) != $no_cols_mat1) {
-                    throw new \Exception('Matrix 1 - uneven row lengths', Cts::HTTP_UNPROCESSABLE_ENTITY);
+                    throw new MatrixAppException('Matrix 1 - uneven row lengths', Cts::HTTP_UNPROCESSABLE_ENTITY);
                 }
             }
 
@@ -63,17 +64,17 @@ class MatrixMultiply
                     //Check of the no of col of row of mat2 is right and do it only once per row
                     if ($i == 0 && $j == 0) {
                         if (sizeof($mat2[$k]) != $no_cols_mat2) {
-                            throw new \Exception('Matrix 2 - uneven row lengths', Cts::HTTP_UNPROCESSABLE_ENTITY);
+                            throw new MatrixAppException('Matrix 2 - uneven row lengths', Cts::HTTP_UNPROCESSABLE_ENTITY);
                         }
                     }
 
                     if (!is_numeric($mat1[$i][$k])) {
-                        throw new \Exception('Non numerical entity encountered in Matrix 1',
+                        throw new MatrixAppException('Non numerical entity encountered in Matrix 1',
                             Cts::HTTP_UNPROCESSABLE_ENTITY);
                     }
 
                     if (!is_numeric($mat2[$k][$j])) {
-                        throw new \Exception('Non numerical entity encountered in Matrix 2',
+                        throw new MatrixAppException('Non numerical entity encountered in Matrix 2',
                             Cts::HTTP_UNPROCESSABLE_ENTITY);
                     }
                     $sum += ($mat1[$i][$k] * $mat2[$k][$j]);
@@ -125,13 +126,13 @@ class MatrixMultiply
 
         //Throw error if matrices are not compatible for multiplication
         if ($no_cols_mat1 != $no_rows_mat2) {
-            throw new \Exception('Matrices cannot be multiplied', Cts::HTTP_UNPROCESSABLE_ENTITY);
+            throw new MatrixAppException('Matrices cannot be multiplied', Cts::HTTP_UNPROCESSABLE_ENTITY);
         }
 
         //Loop through all rows of mat1
         for ($i = 0; $i <= (ceil(sizeof($mat1) / 2) - 1); $i++) {
             if (sizeof($mat1[$i]) != $no_cols_mat1) {
-                throw new \Exception('Matrix 1 - uneven row lengths', Cts::HTTP_UNPROCESSABLE_ENTITY);
+                throw new MatrixAppException('Matrix 1 - uneven row lengths', Cts::HTTP_UNPROCESSABLE_ENTITY);
             }
 
             $row_of_mat1 = $mat1[$i];
@@ -150,19 +151,19 @@ class MatrixMultiply
 
                     if ($i == 0 && $j == 0) {
                         if (sizeof($mat2[$k]) != $no_cols_mat2) {
-                            throw new \Exception('Matrix 2 - uneven row lengths', Cts::HTTP_UNPROCESSABLE_ENTITY);
+                            throw new MatrixAppException('Matrix 2 - uneven row lengths', Cts::HTTP_UNPROCESSABLE_ENTITY);
                         }
                     }
 
 //                  echo $mat1[$i][$k] . " " . $mat2[$k][$j] . "<BR>";
 
                     if (!is_numeric($mat1[$i][$k])) {
-                        throw new \Exception('Non numerical entity encountered in Matrix 1',
+                        throw new MatrixAppException('Non numerical entity encountered in Matrix 1',
                             Cts::HTTP_UNPROCESSABLE_ENTITY);
                     }
 
                     if (!is_numeric($mat2[$k][$j])) {
-                        throw new \Exception('Non numerical entity encountered in Matrix 2',
+                        throw new MatrixAppException('Non numerical entity encountered in Matrix 2',
                             Cts::HTTP_UNPROCESSABLE_ENTITY);
                     }
 

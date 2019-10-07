@@ -29,7 +29,7 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -40,8 +40,8 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
@@ -50,12 +50,14 @@ class Handler extends ExceptionHandler
             switch ($exception->getStatusCode()) {
                 case '405':
                     return response()->json([
-                        'error' => 'Page Not Found. If error persists, contact imranomar@gmail.com'], 405);
+                        'error' => 'Page Not Found. If error persists, contact imranomar@gmail.com'
+                    ], 405);
                     break;
                 // not found
                 case '404':
                     return response()->json([
-                        'error' => 'Page Not Found. If error persists, contact imranomar@gmail.com'], 404);
+                        'error' => 'Page Not Found. If error persists, contact imranomar@gmail.com'
+                    ], 404);
                     break;
                 default:
                     return $this->renderHttpException($exception);
