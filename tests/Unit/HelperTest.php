@@ -52,6 +52,22 @@ class HelperTest extends TestCase
         $this->assertEquals($expect, $actual);
     }
 
+    public function test6()
+    {
+        $num = 2;
+        $expect = 'B';
+        $actual = Helper::intToLetters($num);
+        $this->assertEquals($expect, $actual);
+    }
+
+    public function test76()
+    {
+        $num = 54;
+        $expect = 'AAB';
+        $actual = Helper::intToLetters($num);
+        $this->assertEquals($expect, $actual);
+    }
+
 
 
 
