@@ -6,6 +6,6 @@ namespace App\Interfaces;
 
 interface iCache
 {
-    public static function read(String $mat1,String $mat2): String;
-    public static function write(String $mat1,String $mat2,String $result);
+    public static function read( $mat1, $mat2);
+    public static function write( $mat1,$mat2, $result);
 }

@@ -3,24 +3,32 @@
 
 namespace App\Classes;
 use App\Interfaces\iCache;
-use App\MatrixDBCache;
+use App\MatrixDBCacheModel;
 
 class MatrixDatabaseCache implements iCache
 {
 
-    public static function read(String $mat1,String $mat2)
+    //$mat1 array
+    //$mat2 array
+    //return array
+    public static function read($mat1, $mat2)
     {
-        $mat1_serial = serialize($mat1);
-        $mat2_serial = serialize($mat2);
-        return MatrixDBCache::where('mat1','=',$mat1_serial)->where('mat2','=',$mat2_serial)->first();
+        $result = array();
+
+        $found = MatrixDBCacheModel::where('mat1','=',json_encode($mat1))->where('mat2','=',json_encode($mat2))->first();
+        if($found)
+        {
+            $result =  json_decode($found->result);
+        }
+        return $result;
     }
 
-    public static function write(String $mat1,String $mat2,String $result)
+    public static function write( $mat1, $mat2, $result)
     {
-        $cache = new MatrixDBCache;
-        $cache->mat1 = serialize($mat1);
-        $cache->mat1 = serialize($mat2);
-        $cache->result = serialize($result);
+        $cache = new MatrixDBCacheModel;
+        $cache->mat1 = json_encode($mat1);
+        $cache->mat2 = json_encode($mat2);
+        $cache->result = json_encode($result);
         $cache->save();
     }
 }
