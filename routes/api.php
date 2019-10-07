@@ -1,10 +1,10 @@
 <?php
 
-use App\Cts;
+use App\Classes\Cts;
 use Illuminate\Http\Request;
 use App\Http\Middleware\AuthBasic;
 use App\User;
-use Illuminate\Hashing\BcryptHasher;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,6 +17,7 @@ use Illuminate\Hashing\BcryptHasher;
 */
 
 Route::middleware('AuthBasic')->post('/multiply', 'MatrixController@multiply')->name('mul');
+Route::post('/multiplyquick', 'MatrixController@multiplyquick')->name('mulquick');
 
 Route::post('register', function (Request $request)
 {

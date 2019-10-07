@@ -23,6 +23,9 @@ class MatrixDatabaseCache implements iCache
         return $result;
     }
 
+    //$mat1 array
+    //$mat2 array
+    //$result array
     public static function write( $mat1, $mat2, $result)
     {
         $cache = new MatrixDBCacheModel;
