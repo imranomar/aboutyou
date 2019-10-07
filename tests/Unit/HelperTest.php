@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Classes\Helper;
+
 class HelperTest extends TestCase
 {
 
@@ -15,7 +16,7 @@ class HelperTest extends TestCase
         $num = 0;
         $expect = 'A';
         $actual = Helper::intToLetters($num);
-        $this->assertEquals($expect,$actual);
+        $this->assertEquals($expect, $actual);
     }
 
     public function test2()
@@ -23,7 +24,7 @@ class HelperTest extends TestCase
         $num = 25;
         $expect = 'Z';
         $actual = Helper::intToLetters($num);
-        $this->assertEquals($expect,$actual);
+        $this->assertEquals($expect, $actual);
     }
 
     public function test3()
@@ -31,7 +32,7 @@ class HelperTest extends TestCase
         $num = 26;
         $expect = 'AA';
         $actual = Helper::intToLetters($num);
-        $this->assertEquals($expect,$actual);
+        $this->assertEquals($expect, $actual);
     }
 
     public function test4()
@@ -39,7 +40,7 @@ class HelperTest extends TestCase
         $num = 27;
         $expect = 'AB';
         $actual = Helper::intToLetters($num);
-        $this->assertEquals($expect,$actual);
+        $this->assertEquals($expect, $actual);
     }
 
 

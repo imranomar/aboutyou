@@ -20,7 +20,7 @@ class CreateMatrixDbCacheTable extends Migration
             $table->string('mat1first100chars')->index();
             $table->string('mat2first100chars')->index();
             $table->longText('result');
-            $table->index(array('mat1first100chars','mat2first100chars'));
+            $table->index(array('mat1first100chars', 'mat2first100chars'));
             $table->timestamps();
         });
     }

@@ -7,56 +7,52 @@ use App\Classes\Cts;
 use App\Classes\Helper;
 use App\Classes\MatrixMultiply;
 use Illuminate\Http\Request;
-use App\Http\Requests\MartixValidationRequest;
+use App\Http\Requests\MatrixValidationRequest;
 
 class MatrixController extends Controller
 {
 
-    public function multiply(MartixValidationRequest $r)
+    //multiply 2 matrices
+    public function multiply(MatrixValidationRequest $r)
     {
-        try
-        {
+        try {
             $mat1 = json_decode($r->mat1);
             $mat2 = json_decode($r->mat2);
             //search for matrices in db
             $cached = MatrixDatabaseCache::read($mat1, $mat2);
             if (!$cached) {
                 //cache results
-                $res = MatrixMultiply::multiply($mat1,$mat2);
+                $res = MatrixMultiply::multiply($mat1, $mat2);
                 MatrixDatabaseCache::write($mat1, $mat2, $res);
-                return  json_encode(array('error'=>'','cached'=>'false','result'=>$res));
+                return json_encode(array('error' => '', 'cached' => 'false', 'result' => $res));
+            } else {
+                return json_encode(array('error' => '', 'cached' => 'true', 'result' => $cached));
             }
-            else {
-                return  json_encode(array('error'=>'','cached'=>'true','result'=>$cached));
-            }
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             $code = Helper::isValidHttpStatusCode($e->getCode()) ? $e->getCode() : 500;
             return response(json_encode(array('error' => $e->getMessage())), $code);
         }
 
     }
 
-    public function multiplyquick(MartixValidationRequest $r)
+    //multiply 2 matrices quickly - 3 times faster
+    public function multiplyQuick(MatrixValidationRequest $r)
     {
-        try
-        {
+        try {
             $mat1 = json_decode($r->mat1);
             $mat2 = json_decode($r->mat2);
             //search for matrices in db
             $cached = MatrixDatabaseCache::read($mat1, $mat2);
-            if (!$cached) {
+            if ($cached) {
                 //cache results
-                $res = MatrixMultiply::multiplyquick($mat1,$mat2);
+                $res = MatrixMultiply::multiplyquick($mat1, $mat2);
                 MatrixDatabaseCache::write($mat1, $mat2, $res);
-                return  json_encode(array('error'=>'','cached'=>'false','result'=>$res));
-            }
-            else {
-                return  json_encode(array('error'=>'','cached'=>'true','result'=>$cached));
+                return json_encode(array('error' => '', 'cached' => 'false', 'result' => $res));
+            } else {
+                return json_encode(array('error' => '', 'cached' => 'true', 'result' => $cached));
             }
 
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             $code = Helper::isValidHttpStatusCode($e->getCode()) ? $e->getCode() : 500;
             return response(json_encode(array('error' => $e->getMessage())), $code);
         }

@@ -6,9 +6,12 @@ use App\Interfaces\iCache;
 use App\MatrixDBCacheModel;
 use Illuminate\Support\Facades\Hash;
 
+//A simple db cache to store matrices with results.
 class MatrixDatabaseCache implements iCache
 {
 
+    //Check if multiplication of mat1 and mat2 exists and return result from db
+    //Searches by taking first 100 chars of matrices and checking against col like mat1first100chars
     //$mat1 array
     //$mat2 array
     //return array
@@ -31,6 +34,8 @@ class MatrixDatabaseCache implements iCache
         return $result;
     }
 
+    //A simple db cache to store matrices with results.
+    //Also stores first 100 chars separately in an indexed column of string like mat1first100chars
     //$mat1 array
     //$mat2 array
     //$result array

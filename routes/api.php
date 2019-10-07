@@ -17,10 +17,10 @@ use App\User;
 */
 
 Route::middleware('AuthBasic')->post('/multiply', 'MatrixController@multiply')->name('mul');
-Route::post('/multiplyquick', 'MatrixController@multiplyquick')->name('mulquick');
+Route::post('/multiplyquick', 'MatrixController@multiplyQuick')->name('mulquick');
 
-Route::post('register', function (Request $request)
-{
+//Register User
+Route::post('register', function (Request $request) {
     $validator = Validator::make($request->all(), [
         'name' => 'required',
         'password' => 'required|confirmed|min:8',

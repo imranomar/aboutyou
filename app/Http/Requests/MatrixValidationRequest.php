@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\MatrixValidationRules;
 
-class MartixValidationRequest extends FormRequest
+class MatrixValidationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class MartixValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            'mat1' =>  [ 'required', 'json', new MatrixValidationRules],
-            'mat2' => [ 'required', 'json', new MatrixValidationRules],
+            'mat1' => ['required', 'json', new MatrixValidationRules],
+            'mat2' => ['required', 'json', new MatrixValidationRules],
 
         ];
     }

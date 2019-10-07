@@ -10,21 +10,19 @@ class AuthBasic
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $nexta
      * @return mixed
      */
-    public function handle($request, Closure $next) {
-        if (Auth::onceBasic())
-        {
-            if ($request->ajax() || $request->wantsJson())
-            {
+    public function handle($request, Closure $next)
+    {
+        if (Auth::onceBasic()) {
+            if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {
                 return redirect()->guest('login');
             }
         }
-
         return $next($request);
     }
 }
