@@ -30,8 +30,8 @@ class MatrixController extends Controller
                 return json_encode(array('error' => '', 'cached' => 'true', 'result' => $cached));
             }
         } catch (MatrixAppException $e) {
-            $code = Helper::isValidHttpStatusCode($e->getCode()) ? $e->getCode() : 500;
-            return response(json_encode(array('error' => $e->getMessage())), $code);
+            report($e);
+            return response(json_encode(array('error' => $e->getMessage())), $e->getHttpStatusCode());
         }
 
     }
