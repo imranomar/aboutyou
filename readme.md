@@ -23,6 +23,10 @@ NOTE: Api documentation can be found here at:
 
 https://documenter.getpostman.com/view/7566754/SVtSV9N5?version=latest
 
+NOTE: Api Export For Postman can be found here at:
+
+http://34.228.226.254/public/aboutyou.postman.json
+
 CONFIGURATION
 -------------
 Database configuration can be found in .env file in root
