@@ -220,7 +220,7 @@ class MatrixMultiplicationTest extends TestCase
     {
         $this->withoutMiddleware();
         $data_sent = [
-            'mat1' => "[1,2,3]", //missing comma to test json
+            'mat1' => "[1,2,3]",
             'mat2' => "[[1],[2],[3]]",
         ];
 
