@@ -35,9 +35,9 @@ FILE PERMISSIONS
 ----------------
 Make sure the following are writable:
 
-/opt/bitnami/apache2/htdocs/storage/logs 
+/storage/logs 
 
-/opt/bitnami/apache2/htdocs/storage/framework
+/storage/framework
 
 TO INSTALL
 ----------
