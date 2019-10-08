@@ -6,11 +6,9 @@
 Introduction
 =============
 
-Api takes 2 matrices and multiplies them and returns the result. End point e.g. http://localhost/api/multiply
+Api takes 2 matrices and multiplies them and returns the result. End point http://34.228.226.254/public/api/multiply
 
-Api introduces another faster multiplication algo that multiplies in 1/4th of the time to linear multiplication.  (<i> Had time so was thinking about how could the algo be made more efficient</i> ).
-
-End point e.g. http://localhost/api/multiplyquick
+Api introduces another faster multiplication algo that multiplies in 1/4th of the time to linear multiplication.  (<i> Had time so was thinking about how could the algo be made more efficient</i> ). End point  http://34.228.226.254/public/api/multiplyquick
 
 API Documentation
 =============
@@ -70,9 +68,6 @@ A new user can be created at the end point: http://34.228.226.254/public/api/reg
 Required fields are name, email, password, password_confirmation
 
 <img src = "http://34.228.226.254/public/capture2.png">
-
-
-
 
 UNIT TESTS
 ---------------------------
