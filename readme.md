@@ -55,6 +55,22 @@ Requirements: php7, composer, mysql, nodejs, npm
 
 .run 'php artisan migrate'
 
+AUTHORIZATION
+-------------
+The app uses Basic Auth.  Can use the following credentials online
+
+username: imranomar@gmail.com
+
+password: qweqwe123
+
+A new user can be created at the end point: http://34.228.226.254/public/api/register
+
+Required fields are name, email, password, password_confirmation
+
+<img src = "http://34.228.226.254/public/capture.png">
+
+
+
 UNIT TESTS
 ---------------------------
 .can be found in /tests/Unit
