@@ -63,11 +63,14 @@ username: imranomar@gmail.com
 
 password: qweqwe123
 
+<img src = "http://34.228.226.254/public/capture.png">
+
 A new user can be created at the end point: http://34.228.226.254/public/api/register
 
 Required fields are name, email, password, password_confirmation
 
-<img src = "http://34.228.226.254/public/capture.png">
+<img src = "http://34.228.226.254/public/capture2.png">
+
 
 
 
