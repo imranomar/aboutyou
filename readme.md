@@ -53,7 +53,7 @@ Requirements: php7, composer, mysql, nodejs, npm
 
 AUTHORIZATION
 -------------
-The app uses Basic Auth.  Can use the following credentials online
+The app uses Basic Auth. ( I can easily switch it to Token based or Passport OAuth ). Can use the following credentials online
 
 username: imranomar@gmail.com
 
@@ -66,6 +66,14 @@ A new user can be created at the end point: http://34.228.226.254/public/api/reg
 Required fields are name, email, password, password_confirmation
 
 <img src = "http://34.228.226.254/public/capture2.png">
+
+Basic Auth uses the email and password base64 encoded. 
+
+e.g. base64_encode("imranomar@gmail.com:qweqwe123");
+
+<b>Sample Header Contents</b>
+
+[authorization] => Basic aW1yYW5vbWFyQGdtYWlsLmNvbTpxd2Vxd2UxMjM= [accept] => application/json [content-type] => application/x-www-form-urlencoded [php-auth-user] => imranomar@gmail.com [php-auth-pw] => qweqwe123 ) 
 
 UNIT TESTS
 ---------------------------
